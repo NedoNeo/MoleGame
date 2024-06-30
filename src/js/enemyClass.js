@@ -1,7 +1,7 @@
 export default class Enemy {
     constructor() {
         this._enemy = document.createElement("img");
-        this._enemy.setAttribute("src","./images/goblin.png");
+        this._enemy.setAttribute("src","./img/goblin.png");
         this._enemy.classList.add("image");
     }
 
