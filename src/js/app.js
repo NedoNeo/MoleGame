@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded",() => {
     let game = new Game(document.querySelector(".game_container"), document.querySelectorAll(".game_item"));
     game._item.addEventListener("click", (event) => {
         clearInterval(loseInterval);
+        
 
         if((event.target.firstElementChild === enemu._enemy) || (event.target === enemu._enemy)){
             counter++;
@@ -48,7 +49,6 @@ document.addEventListener("DOMContentLoaded",() => {
 
     })
     setInterval(()=> {
-        console.log(loseInterval)
         loseInterval = setInterval(() => {
             if(moleCounter >= 5){
                 clearInterval(loseInterval);
