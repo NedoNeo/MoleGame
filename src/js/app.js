@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded",() => {
                 moleCounter++;
                 console.log(d)
             }
-        },1000)
+        },1200)
         game.takeCash(enemu.moveEnemy(game._cels, game.cash));
     }, 1000)
 })
