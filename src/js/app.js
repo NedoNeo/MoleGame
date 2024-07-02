@@ -53,21 +53,29 @@ document.addEventListener("DOMContentLoaded",() => {
         }
 
     })
-    setInterval(()=> {
-        if(!lastClisk) {
-            moleCounter++;
-            loseCounter.textContent = moleCounter;
-        } 
-        if(moleCounter === 5) {
-           
-            alert("Вы проиграли!");
-            counter = 0;
-            moleCounter = 0;
-            counterItem.textContent = counter;
-            loseCounter.textContent = moleCounter;
-            
-        }
-        lastClisk = false;
-        game.takeCash(enemu.moveEnemy(game._cels, game.cash));
+    setInterval( ()=> {
+        let newPromise = new Promise(resolve => {
+            setTimeout( ()=>{
+                if(!lastClisk) {
+                    moleCounter++;
+                    loseCounter.textContent = moleCounter;
+                } 
+                if(moleCounter === 5) {
+                   
+                    alert("Вы проиграли!");
+                    counter = 0;
+                    moleCounter = 0;
+                    counterItem.textContent = counter;
+                    loseCounter.textContent = moleCounter;
+                    
+                }
+                resolve()
+            },500)
+        })
+
+        newPromise.then(() => {
+            lastClisk = false;
+            game.takeCash(enemu.moveEnemy(game._cels, game.cash));
+        })
     }, 1000)
 })
