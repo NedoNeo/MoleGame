@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded",() => {
                 moleCounter = 0;
                 counterItem.textContent = counter;
             }  else {
+                clearInterval(loseInterval);
                 moleCounter++;
             }
         },1000)
