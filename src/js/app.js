@@ -15,13 +15,16 @@ document.addEventListener("DOMContentLoaded",() => {
     let counter = 0;
     let loseCounter = document.querySelector(".mole_win")
     let moleCounter = 0;
-    let loseInterval;
-    let d = 0;
+    let lastClisk = false;
+   
 
 
     let game = new Game(document.querySelector(".game_container"), document.querySelectorAll(".game_item"));
+
+    enemu.moveEnemy(game._cels, game.cash)
+
     game._item.addEventListener("click", (event) => {
-        clearInterval(loseInterval);
+        lastClisk = true;
         
 
         if((event.target.firstElementChild === enemu._enemy) || (event.target === enemu._enemy)){
@@ -37,33 +40,34 @@ document.addEventListener("DOMContentLoaded",() => {
             counter = 0;
             moleCounter = 0;
             counterItem.textContent = counter;
-            // resultWindow.firstElementChild.textContent = 'Вы победили!';
-            // resultWindow.classList.toggle("hidden");
+            loseCounter.textContent = moleCounter;
+            
         } else if(moleCounter === 5) {
-            // resultWindow.firstElementChild.textContent = 'Вы проиграли!';
-            // resultWindow.classList.toggle("hidden");
+           
             alert("Вы проиграли!");
             counter = 0;
             moleCounter = 0;
             counterItem.textContent = counter;
+            loseCounter.textContent = moleCounter;
+            
         }
 
     })
     setInterval(()=> {
-        loseInterval = setInterval(() => {
-            if(moleCounter >= 5){
-                clearInterval(loseInterval);
-                alert("Вы проиграли!");
-                counter = 0;
-                moleCounter = 0;
-                counterItem.textContent = counter;
-            }  else {
-                clearInterval(loseInterval);
-                d++
-                moleCounter++;
-                console.log(d)
-            }
-        },1200)
+        if(!lastClisk) {
+            moleCounter++;
+            loseCounter.textContent = moleCounter;
+        } 
+        if(moleCounter === 5) {
+           
+            alert("Вы проиграли!");
+            counter = 0;
+            moleCounter = 0;
+            counterItem.textContent = counter;
+            loseCounter.textContent = moleCounter;
+            
+        }
+        lastClisk = false;
         game.takeCash(enemu.moveEnemy(game._cels, game.cash));
     }, 1000)
 })
