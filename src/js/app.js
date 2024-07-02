@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded",() => {
     let enemu = new Enemy();
     let counterItem = document.querySelector(".mole_counter");
     let counter = 0;
-    let resultWindow = document.querySelector(".lose_window");
+    let loseCounter = document.querySelector(".mole_win")
     let moleCounter = 0;
     let loseInterval;
     let d = 0;
@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded",() => {
             counterItem.textContent = counter;
         } else {
             moleCounter++;
+            loseCounter.textContent = moleCounter;
         }
 
         if(counter === 5) {
