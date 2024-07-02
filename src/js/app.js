@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded",() => {
     let resultWindow = document.querySelector(".lose_window");
     let moleCounter = 0;
     let loseInterval;
+    let d = 0;
 
 
     let game = new Game(document.querySelector(".game_container"), document.querySelectorAll(".game_item"));
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     })
     setInterval(()=> {
+        console.log(loseInterval)
         loseInterval = setInterval(() => {
             if(moleCounter >= 5){
                 clearInterval(loseInterval);
@@ -56,7 +58,9 @@ document.addEventListener("DOMContentLoaded",() => {
                 counterItem.textContent = counter;
             }  else {
                 clearInterval(loseInterval);
+                d++
                 moleCounter++;
+                console.log(d)
             }
         },1000)
         game.takeCash(enemu.moveEnemy(game._cels, game.cash));
