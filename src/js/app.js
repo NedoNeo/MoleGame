@@ -2,16 +2,25 @@ import Game from "./gameItemClass"
 import Enemy from "./enemyClass";
 
 document.addEventListener("DOMContentLoaded",() => {
+
+    for(let i = 0; i < 16; i++) {
+        let gameItem = document.createElement("div");
+        gameItem.classList.add("game_item");
+
+        document.querySelector(".game_container").appendChild(gameItem);
+    }
+
     let enemu = new Enemy();
     let counterItem = document.querySelector(".mole_counter");
     let counter = 0;
     let resultWindow = document.querySelector(".lose_window");
     let moleCounter = 0;
+    let loseInterval;
 
 
     let game = new Game(document.querySelector(".game_container"), document.querySelectorAll(".game_item"));
     game._item.addEventListener("click", (event) => {
-        console.log(event.target)
+        clearInterval(loseInterval);
 
         if((event.target.firstElementChild === enemu._enemy) || (event.target === enemu._enemy)){
             counter++;
@@ -38,6 +47,17 @@ document.addEventListener("DOMContentLoaded",() => {
 
     })
     setInterval(()=> {
+        loseInterval = setInterval(() => {
+            if(moleCounter >= 5){
+                clearInterval(loseInterval);
+                alert("Вы проиграли!");
+                counter = 0;
+                moleCounter = 0;
+                counterItem.textContent = counter;
+            }  else {
+                moleCounter++;
+            }
+        },1000)
         game.takeCash(enemu.moveEnemy(game._cels, game.cash));
     }, 1000)
 })
